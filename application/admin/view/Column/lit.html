@@ -1,0 +1,61 @@
+{extend name="Public/base"/}
+    {block name="css"}
+    <!--Beyond styles-->
+    <link id="beyond-link" href="__PUBLIC__static/admin/css/beyond.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__static/admin/css/demo.css" rel="stylesheet">
+    <link href="__PUBLIC__static/admin/css/typicons.css" rel="stylesheet">
+    <link href="__PUBLIC__static/admin/css/animate.css" rel="stylesheet">
+    {/block}
+{block name="page-breadcrumbs"}
+<ul class="breadcrumb">
+    <li><a href="#">系统</a></li>
+    <li class="active">栏目管理</li>
+</ul>
+{/block}
+{block name="page-body"}                    
+<button type="button" tooltip="添加栏目" class="btn btn-sm btn-azure btn-addon" onClick="javascript:window.location.href = '{:url('Column/create')}'"> <i class="fa fa-plus"></i> Add
+</button>
+<div class="row">
+    <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="widget">
+            <div class="widget-body">
+                <div class="flip-scroll">
+                    <table class="table table-bordered table-hover">
+                        <thead class="">
+                            <tr>
+                                <th class="text-center">ID</th>
+                                <th class="text-center">栏目名称</th>
+                                <th class="text-center">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {volist name='lit' id='cate'}
+                            <tr>
+                                <td align="center">{$cate.id}</td>
+                                <td align="center">{$cate.catename}</td>
+                                <td align="center">
+                                    <a href="{:url('Column/edit','id='.$cate.id)}" class="btn btn-primary btn-sm shiny">
+                                        <i class="fa fa-edit"></i> 编辑
+                                    </a>
+                                    <a href="#" onClick="warning('确实要删除吗', '{:url('Column/delete','id='.$cate.id)}')" class="btn btn-danger btn-sm shiny">
+                                        <i class="fa fa-trash-o"></i> 删除
+                                    </a>
+                                </td>
+                            </tr>
+                            {/volist}
+                        </tbody>
+                    </table>
+                </div>
+                <div style="text-align:right; margin-top:10px;">
+                {$lit->render()}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
+
+{block name="js"}
+<!--Beyond Scripts-->
+<script src="__PUBLIC__static/admin/js/beyond.js"></script>
+{/block}
